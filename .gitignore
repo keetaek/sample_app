@@ -5,3 +5,4 @@ tmp/**/*
 *.swp
 doc/api
 doc/app
+public/stylesheets/blueprint/*
