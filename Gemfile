@@ -28,7 +28,7 @@ gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
 # and rake tasks are available in development mode:
 group :development do
   gem 'rspec-rails', '2.4.0'
-#   gem 'webrat'
+  gem 'annotate-models', '1.0.4'
 end
 
 group :test do
