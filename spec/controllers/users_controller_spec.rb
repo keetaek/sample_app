@@ -235,6 +235,29 @@ describe UsersController do
         response.should have_selector("a", :href => "/users?page=2",
                                            :content => "Next")
       end
+      it "should not have delete links" do
+        get :index
+        response.should_not have_selector("li>a", :content => "delete")
+      end
+    end
+    describe "as an admin user" do
+      before(:each) do
+        @admin = Factory(:user, :name => "admin", :email => "admin@example.com", :admin => true)
+        test_sign_in(@admin)
+        @users = [@admin]
+        @users << Factory(:user, :name => "test1", :email => Factory.next(:email))
+      end
+      it "should have delete links" do
+        get :index
+        @users.each do
+          response.should have_selector("li>a", :content => "delete")
+        end
+      end
+      it "should not have delete link for admin oneself" do
+        get :index
+        response.should_not have_selector("li>a", :title => "Delete admin")
+        response.should have_selector("li>a", :title => "Delete test1")
+      end
     end
   end
   describe "DELETE 'destroy'" do
