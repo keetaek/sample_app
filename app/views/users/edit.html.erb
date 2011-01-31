@@ -1,7 +1,8 @@
-<h1>Sign up</h1>
+<h1>Edit user</h1>
 
 <%= form_for(@user) do |f| %>
-  <%= render 'shared/error_message', :object => f.object%>
+  <%= render 'shared/error_message', :object => f.object %>
+  <%-#f.object??? Instead of having _error_message @user specific, we are making it generic -%>
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
@@ -16,9 +17,14 @@
   </div>
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation %>
+    <%= f.password_field :name %>
   </div>
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="action">
+    <%= f.submit "Update" %>
   </div>
 <% end %>
+
+<div>
+  <%= gravatar_for @user %>
+  <a href="http://gravatar.com/emails">change</a>
+</div>

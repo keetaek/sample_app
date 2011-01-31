@@ -1,7 +1,9 @@
-<h2>List of Users</h2>
+<h2>All users</h2>
 
-<ul>
-  <% @users.each do |u| %>
-    <li><strong><%= link_to u.name, @name %> email: <%= u.email %></strong></li>
-  <% end %>
+<%= will_paginate %>
+
+<ul class="users">
+  <%= render @users %>
 </ul>
+
+<%= will_paginate %>
