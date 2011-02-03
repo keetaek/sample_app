@@ -1,2 +1,20 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
+$(document).ready(function(){
+    var max_length = 140;
+    whenkeydown(max_length)
+});
+
+whenkeydown = function(max_length)
+{
+  $("#micropost_content").unbind().keyup(function()
+  {
+    var text = $(this).val();
+    var numofchars = text.length;
+    if(numofchars <= max_length)
+    {
+      $("#counter").html("").html(text.length)
+    } else {
+      $(this).val(text.substring(0, max_length))
+    }
+  });
+
+}

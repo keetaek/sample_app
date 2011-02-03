@@ -14,5 +14,10 @@ namespace :db do
       password = "password"
       User.create!(:name => name, :email => email, :password => password, :password_confirmation => password)
     end
+    User.all(:limit => 6).each do |u|
+      2.times do
+        u.microposts.create!(:content => Faker::Lorem.sentences(3))
+      end
+    end
   end
 end

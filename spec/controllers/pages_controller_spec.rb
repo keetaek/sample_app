@@ -15,6 +15,24 @@ describe PagesController do
       response.should have_selector("title", 
           :content => "#{@base_title} | Home")
     end
+    describe "right number of micrposts" do
+      before(:each) do
+        @user = Factory(:user)
+        test_sign_in(@user)
+      end
+      it "should have the plural form of microposts" do
+      Factory(:micropost, :user => @user, :content => "Foo bar")
+      Factory(:micropost, :user => @user, :content => "Baz quux")
+        get 'home'
+        response.should have_selector('span', :content => "2 microposts")
+      end
+      it "should have the singular form of microposts" do
+        Factory(:micropost, :user => @user, :content => "Baz quux")
+        get 'home'
+        response.should_not have_selector('span', :content => "1 microposts")
+        response.should have_selector('span', :content => "1 micropost")
+      end
+    end
   end
 
   describe "GET 'contact'" do
