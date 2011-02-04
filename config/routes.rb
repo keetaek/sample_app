@@ -1,13 +1,26 @@
 SampleApp::Application.routes.draw do
-  get "microposts/create"
+#get "relationships/create"
 
-  get "microposts/destroy"
+#get "relationships/destroy"
 
-  get "sessions/new"
+#get "microposts/create"
+#get "microposts/destroy"
+#get "sessions/new"
 
-  resources :users
+  resources :users do
+    member do
+      get :following, :followers #This adds /users/1/following, /users/1/followers actions
+    end
+  end
+#  resources: users do
+#    collection do
+#      get :tigers
+#    end
+#  end
+#  : This adds the path /users/tigers 
   resources :sessions, :only => [:new, :create, :destroy]
   resources :microposts, :only => [:create, :destroy]
+  resources :relationships, :only => [:create, :destroy]
   match '/signin', :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
   match '/signup', :to => 'users#new'
